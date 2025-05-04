@@ -21,7 +21,7 @@ def create_fis_ecs_task_stop_experiment_body(self, config, role, log_group, ecs_
             "ECSTaskStopAction": fis.CfnExperimentTemplate.ExperimentTemplateActionProperty(
                 action_id="aws:ecs:stop-task",
                 description=f"Stop ECS Task for service app {ecs_app_name} with percent {percent}",
-                parameters={"force": "true"},
+                parameters={},
                 targets={
                     "Tasks": "ECSTaskStop"
                 }

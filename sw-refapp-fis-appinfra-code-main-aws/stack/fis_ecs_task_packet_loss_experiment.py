@@ -28,7 +28,9 @@ def create_fis_ecs_task_packet_loss_experiment_body(self, config, role, log_grou
                 description=f"Inject {loss_percent}% packet loss in ECS tasks for {ecs_app_name}",
                 parameters={
                     "lossPercent": str(loss_percent),
-                    "duration": duration
+                    "duration": duration,
+                    "installDependencies": "true",
+                    "useEcsFaultInjectionEndpoints": "true"
                 },
                 targets={
                     "Tasks": "ECSTaskPacketLoss"
