@@ -318,7 +318,7 @@ def handler(event, context):
         config = resource_config
         app_config = app_config
 
-        bucket = self.create_artifact_store(config)
+        # bucket = self.create_artifact_store(config)
 
         # vpc lookup from account
         vpc = self.lookup_vpc(config=config)
