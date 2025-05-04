@@ -29,7 +29,8 @@ def create_fis_multi_az_failover_experiment_body(self, config, subnet_list_az1, 
         targets={
             "SubnetDown": fis.CfnExperimentTemplate.ExperimentTemplateTargetProperty(
                 resource_type="aws:ec2:subnet",
-                resource_arns=subnet_arns,
+                resource_tags={"sw:product" : "refapp"},
+                # resource_arns=subnet_arns,
                 selection_mode="ALL",
                 parameters={}
             ),
