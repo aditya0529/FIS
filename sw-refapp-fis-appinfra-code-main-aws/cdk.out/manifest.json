@@ -1,0 +1,294 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "sw-dts-dev-fis-infra-stack-main-aws.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "sw-dts-dev-fis-infra-stack-main-aws.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "sw-dts-dev-fis-infra-stack-main-aws": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://767398091386/eu-central-1",
+      "properties": {
+        "templateFile": "sw-dts-dev-fis-infra-stack-main-aws.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "sw:application": "fis",
+          "sw:cost_center": "C843",
+          "sw:environment": "dev",
+          "sw:product": "dts"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::767398091386:role/cdk-hnb659fds-deploy-role-767398091386-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::767398091386:role/cdk-hnb659fds-cfn-exec-role-767398091386-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-767398091386-eu-central-1/f7167a2cfc07f1fe28dd237fef2387022b3bb717634780ebe36c924c70185a02.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "sw-dts-dev-fis-infra-stack-main-aws.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::767398091386:role/cdk-hnb659fds-lookup-role-767398091386-eu-central-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "sw-dts-dev-fis-infra-stack-main-aws.assets"
+      ],
+      "metadata": {
+        "/sw-dts-dev-fis-infra-stack-main-aws": [
+          {
+            "type": "aws:cdk:error",
+            "data": "Need to perform AWS calls for account 767398091386, but no credentials have been configured",
+            "trace": [
+              "Annotations.addMessage (/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/jsii-kernel-iVE7DY/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1608)",
+              "Annotations.addError (/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/jsii-kernel-iVE7DY/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1100)",
+              "ContextProvider.getValue (/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/jsii-kernel-iVE7DY/node_modules/aws-cdk-lib/core/lib/context-provider.js:2:1172)",
+              "Vpc.fromLookup (/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/jsii-kernel-iVE7DY/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:9203)",
+              "/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:315:152",
+              "Kernel._Kernel_ensureSync (/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:920:24)",
+              "Kernel.sinvoke (/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:315:102)",
+              "KernelHost.processRequest (/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:15471:36)",
+              "KernelHost.run (/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:15431:22)",
+              "Immediate._onImmediate (/private/var/folders/_b/nrzc1lw52k9cy32pkbdpd5yw0000gn/T/tmpl2p8paxc/lib/program.js:15432:46)",
+              "process.processImmediate (node:internal/timers:505:21)"
+            ]
+          },
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "sw:application",
+                "Value": "fis"
+              },
+              {
+                "Key": "sw:cost_center",
+                "Value": "C843"
+              },
+              {
+                "Key": "sw:environment",
+                "Value": "dev"
+              },
+              {
+                "Key": "sw:product",
+                "Value": "dts"
+              }
+            ]
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarys3mainaws5F85F196"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarys3mainawsPolicy3B350EC4"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-fis-logs-main-aws/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisfislogsmainawsDAB7E1DF"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisexecrolemainaws533C719F"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisexecrolemainawsDefaultPolicyD314404F"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-azfailure-experiment-az1-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisazfailureexperimentaz1mainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-azfailure-experiment-az2-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisazfailureexperimentaz2mainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-acp-p50-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopacpp50experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-acp-p100-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopacpp100experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sz-p50-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopszp50experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sz-p100-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopszp100experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sp-p50-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopspp50experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sp-p100-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopspp100experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-core-p50-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopcorep50experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-core-p100-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisecstaskstopcorep100experimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-activationportal-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisrdsfailoveractivationportalexperimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-splitkeycoreservice-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisrdsfailoversplitkeycoreserviceexperimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-splitkeysecurezone-experiment-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfisrdsfailoversplitkeysecurezoneexperimentmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryrolemainaws84504C58"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryrolemainawsDefaultPolicyD51DBB3E"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sg-main-aws/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarysgmainaws1ECB8316"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sg-main-aws/to pl-6ea54007:443": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarysgmainawstopl6ea540074436DF09665"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-acp-appaz1a-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryacpappaz1amainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sp-appaz1a-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryspappaz1amainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-core-appaz1a-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarycoreappaz1amainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-acp-appaz1b-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryacpappaz1bmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sp-appaz1b-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanaryspappaz1bmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-core-appaz1b-main-aws": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "swdtsdevfiscanarycoreappaz1bmainaws"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/sw-dts-dev-fis-infra-stack-main-aws/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "sw-dts-dev-fis-infra-stack-main-aws"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  },
+  "missing": [
+    {
+      "key": "vpc-provider:account=767398091386:filter.vpc-id=vpc-066e64a0362de7df0:region=eu-central-1:returnAsymmetricSubnets=true",
+      "provider": "vpc-provider",
+      "props": {
+        "account": "767398091386",
+        "region": "eu-central-1",
+        "filter": {
+          "vpc-id": "vpc-066e64a0362de7df0"
+        },
+        "returnAsymmetricSubnets": true,
+        "lookupRoleArn": "arn:${AWS::Partition}:iam::767398091386:role/cdk-hnb659fds-lookup-role-767398091386-eu-central-1"
+      }
+    }
+  ]
+}

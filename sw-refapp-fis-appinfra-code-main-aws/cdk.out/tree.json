@@ -1,0 +1,2278 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "sw-dts-dev-fis-infra-stack-main-aws": {
+        "id": "sw-dts-dev-fis-infra-stack-main-aws",
+        "path": "sw-dts-dev-fis-infra-stack-main-aws",
+        "children": {
+          "sw-dts-dev-fis-canary-s3-main-aws": {
+            "id": "sw-dts-dev-fis-canary-s3-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketEncryption": {
+                      "serverSideEncryptionConfiguration": [
+                        {
+                          "serverSideEncryptionByDefault": {
+                            "sseAlgorithm": "AES256"
+                          }
+                        }
+                      ]
+                    },
+                    "bucketName": "sw-dts-dev-fis-canary-s3-767398091386-main-aws",
+                    "lifecycleConfiguration": {
+                      "rules": [
+                        {
+                          "id": "sw-dts-dev-fis-s3-lifecycle-main-aws",
+                          "noncurrentVersionExpiration": {
+                            "noncurrentDays": 7,
+                            "newerNoncurrentVersions": 1
+                          },
+                          "status": "Enabled"
+                        }
+                      ]
+                    },
+                    "objectLockEnabled": false,
+                    "ownershipControls": {
+                      "rules": [
+                        {
+                          "objectOwnership": "BucketOwnerEnforced"
+                        }
+                      ]
+                    },
+                    "publicAccessBlockConfiguration": {
+                      "blockPublicAcls": true,
+                      "blockPublicPolicy": true,
+                      "ignorePublicAcls": true,
+                      "restrictPublicBuckets": true
+                    },
+                    "tags": [
+                      {
+                        "key": "sw:application",
+                        "value": "fis"
+                      },
+                      {
+                        "key": "sw:cost_center",
+                        "value": "C843"
+                      },
+                      {
+                        "key": "sw:environment",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "sw:product",
+                        "value": "dts"
+                      }
+                    ],
+                    "versioningConfiguration": {
+                      "status": "Enabled"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.131.0"
+                }
+              },
+              "Policy": {
+                "id": "Policy",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws/Policy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-s3-main-aws/Policy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "bucket": {
+                          "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                        },
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "s3:*",
+                              "Condition": {
+                                "Bool": {
+                                  "aws:SecureTransport": "false"
+                                }
+                              },
+                              "Effect": "Deny",
+                              "Principal": {
+                                "AWS": "*"
+                              },
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "swdtsdevfiscanarys3mainaws5F85F196",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "swdtsdevfiscanarys3mainaws5F85F196",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Action": "s3:*",
+                              "Condition": {
+                                "NumericLessThan": {
+                                  "s3:TlsVersion": 1.2
+                                }
+                              },
+                              "Effect": "Deny",
+                              "Principal": {
+                                "AWS": "*"
+                              },
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "swdtsdevfiscanarys3mainaws5F85F196",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "swdtsdevfiscanarys3mainaws5F85F196",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                      "version": "2.131.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-vpc-main-aws": {
+            "id": "sw-dts-dev-fis-vpc-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/PrivateSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/PrivateSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "IsolatedSubnet1": {
+                "id": "IsolatedSubnet1",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/IsolatedSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "IsolatedSubnet2": {
+                "id": "IsolatedSubnet2",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-vpc-main-aws/IsolatedSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-fis-logs-main-aws": {
+            "id": "sw-dts-dev-fis-fis-logs-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-fis-logs-main-aws",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-fis-logs-main-aws/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "logGroupName": "/sw/fis/sw-dts-dev-fis-fis-logs-main-aws",
+                    "retentionInDays": 30,
+                    "tags": [
+                      {
+                        "key": "sw:application",
+                        "value": "fis"
+                      },
+                      {
+                        "key": "sw:cost_center",
+                        "value": "C843"
+                      },
+                      {
+                        "key": "sw:environment",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "sw:product",
+                        "value": "dts"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-exec-role-main-aws": {
+            "id": "sw-dts-dev-fis-exec-role-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws",
+            "children": {
+              "Importsw-dts-dev-fis-exec-role-main-aws": {
+                "id": "Importsw-dts-dev-fis-exec-role-main-aws",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/Importsw-dts-dev-fis-exec-role-main-aws",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "fis.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/service-role/AWSFaultInjectionSimulatorNetworkAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/service-role/AWSFaultInjectionSimulatorRDSAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/service-role/AWSFaultInjectionSimulatorECSAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/service-role/AWSFaultInjectionSimulatorSSMAccess"
+                          ]
+                        ]
+                      }
+                    ],
+                    "roleName": "sw-dts-dev-fis-exec-role-main-aws",
+                    "tags": [
+                      {
+                        "key": "sw:application",
+                        "value": "fis"
+                      },
+                      {
+                        "key": "sw:cost_center",
+                        "value": "C843"
+                      },
+                      {
+                        "key": "sw:environment",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "sw:product",
+                        "value": "dts"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.131.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-exec-role-main-aws/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "fis:*",
+                              "Effect": "Allow",
+                              "Resource": [
+                                "arn:aws:fis:*:767398091386:action/*",
+                                "arn:aws:fis:*:767398091386:experiment-template/*",
+                                "arn:aws:fis:*:767398091386:experiment/*",
+                                "arn:aws:fis:*:767398091386:safety-lever/*"
+                              ]
+                            },
+                            {
+                              "Action": [
+                                "ec2:CreateNetworkInterface",
+                                "ec2:CreateNetworkInterfacePermission",
+                                "ec2:CreateTags",
+                                "ec2:DeleteNetworkInterface",
+                                "ec2:DeleteNetworkInterfacePermission",
+                                "ec2:DescribeNetworkInterfaces",
+                                "ec2:DescribeSubnets",
+                                "ec2:DescribeVpcs",
+                                "fis:GetTargetResourceType",
+                                "fis:ListActions",
+                                "fis:ListExperimentTemplates",
+                                "fis:ListExperiments",
+                                "fis:ListTargetResourceTypes",
+                                "logs:CreateLogDelivery",
+                                "logs:GetLogDelivery",
+                                "logs:ListLogDeliveries",
+                                "logs:UpdateLogDelivery"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            },
+                            {
+                              "Action": "iam:CreateServiceLinkedRole",
+                              "Effect": "Allow",
+                              "Resource": "arn:aws:iam::767398091386:role/*"
+                            },
+                            {
+                              "Action": [
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "arn:aws:logs:*:*:log-group:/sw/fis/*:*"
+                            },
+                            {
+                              "Action": [
+                                "elasticache:FailoverGlobalReplicationGroup",
+                                "elasticache:InterruptClusterAzPower",
+                                "elasticache:TestFailover"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                "arn:aws:elasticache:*:767398091386:replicationgroup:*",
+                                "arn:aws:elasticache::767398091386:globalreplicationgroup:*"
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "swdtsdevfisexecrolemainawsDefaultPolicyD314404F",
+                        "roles": [
+                          {
+                            "Ref": "swdtsdevfisexecrolemainaws533C719F"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.131.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-azfailure-experiment-az1-main-aws": {
+            "id": "sw-dts-dev-fis-azfailure-experiment-az1-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-azfailure-experiment-az1-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "DisruptNetworkConnectivity": {
+                    "actionId": "aws:network:disrupt-connectivity",
+                    "description": "Disrupt network connectivity for subnets in az1",
+                    "parameters": {
+                      "duration": "PT15M",
+                      "scope": "all"
+                    },
+                    "targets": {
+                      "Subnets": "SubnetDown"
+                    }
+                  },
+                  "RDSFailoverAction": {
+                    "actionId": "aws:rds:failover-db-cluster",
+                    "description": "Aurora Serverless RDS Failover DB",
+                    "parameters": {},
+                    "targets": {
+                      "Clusters": "RDSFailover"
+                    }
+                  },
+                  "PauseElastiCache": {
+                    "actionId": "aws:elasticache:replicationgroup-interrupt-az-power",
+                    "parameters": {
+                      "duration": "PT15M"
+                    },
+                    "targets": {
+                      "ReplicationGroups": "ElastiCacheCluster"
+                    }
+                  },
+                  "FISWait": {
+                    "actionId": "aws:fis:wait",
+                    "parameters": {
+                      "duration": "PT15M"
+                    },
+                    "targets": {}
+                  }
+                },
+                "description": "AZ Power Failure Simulation in az1",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-azfailure-experiment-az1-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "SubnetDown": {
+                    "resourceType": "aws:ec2:subnet",
+                    "selectionMode": "ALL",
+                    "parameters": {},
+                    "resourceArns": [
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-0cfebf92b0918a0f3",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-0c36a6cf528e34ab0",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-05e94508475baea1e",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-0564363c26d12f5cf"
+                    ]
+                  },
+                  "RDSFailover": {
+                    "resourceType": "aws:rds:cluster",
+                    "selectionMode": "ALL",
+                    "parameters": {
+                      "writerAvailabilityZoneIdentifiers": "eu-central-1a"
+                    },
+                    "resourceTags": {
+                      "sw:product": "dts"
+                    }
+                  },
+                  "ElastiCacheCluster": {
+                    "resourceType": "aws:elasticache:replicationgroup",
+                    "selectionMode": "ALL",
+                    "parameters": {
+                      "availabilityZoneIdentifier": "eu-central-1a"
+                    },
+                    "resourceTags": {
+                      "sw:product": "dts"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-azfailure-experiment-az2-main-aws": {
+            "id": "sw-dts-dev-fis-azfailure-experiment-az2-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-azfailure-experiment-az2-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "DisruptNetworkConnectivity": {
+                    "actionId": "aws:network:disrupt-connectivity",
+                    "description": "Disrupt network connectivity for subnets in az2",
+                    "parameters": {
+                      "duration": "PT15M",
+                      "scope": "all"
+                    },
+                    "targets": {
+                      "Subnets": "SubnetDown"
+                    }
+                  },
+                  "RDSFailoverAction": {
+                    "actionId": "aws:rds:failover-db-cluster",
+                    "description": "Aurora Serverless RDS Failover DB",
+                    "parameters": {},
+                    "targets": {
+                      "Clusters": "RDSFailover"
+                    }
+                  },
+                  "PauseElastiCache": {
+                    "actionId": "aws:elasticache:replicationgroup-interrupt-az-power",
+                    "parameters": {
+                      "duration": "PT15M"
+                    },
+                    "targets": {
+                      "ReplicationGroups": "ElastiCacheCluster"
+                    }
+                  },
+                  "FISWait": {
+                    "actionId": "aws:fis:wait",
+                    "parameters": {
+                      "duration": "PT15M"
+                    },
+                    "targets": {}
+                  }
+                },
+                "description": "AZ Power Failure Simulation in az2",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-azfailure-experiment-az2-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "SubnetDown": {
+                    "resourceType": "aws:ec2:subnet",
+                    "selectionMode": "ALL",
+                    "parameters": {},
+                    "resourceArns": [
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-08b5dba6d1c9fbef8",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-0c3f871531c34a3a7",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-00151cadadb58dee0",
+                      "arn:aws:ec2:eu-central-1:767398091386:subnet/subnet-015ef9910a6ccdca3"
+                    ]
+                  },
+                  "RDSFailover": {
+                    "resourceType": "aws:rds:cluster",
+                    "selectionMode": "ALL",
+                    "parameters": {
+                      "writerAvailabilityZoneIdentifiers": "eu-central-1b"
+                    },
+                    "resourceTags": {
+                      "sw:product": "dts"
+                    }
+                  },
+                  "ElastiCacheCluster": {
+                    "resourceType": "aws:elasticache:replicationgroup",
+                    "selectionMode": "ALL",
+                    "parameters": {
+                      "availabilityZoneIdentifier": "eu-central-1b"
+                    },
+                    "resourceTags": {
+                      "sw:product": "dts"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-acp-p50-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-acp-p50-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-acp-p50-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app acp with percent 50",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app acp with percent 50",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-acp-p50-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(50)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-acp-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-acp-p100-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-acp-p100-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-acp-p100-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app acp with percent 100",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app acp with percent 100",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-acp-p100-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(100)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-acp-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-sz-p50-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-sz-p50-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sz-p50-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app sz with percent 50",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app sz with percent 50",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-sz-p50-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(50)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-sz-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-sz-p100-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-sz-p100-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sz-p100-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app sz with percent 100",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app sz with percent 100",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-sz-p100-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(100)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-sz-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-sp-p50-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-sp-p50-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sp-p50-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app sp with percent 50",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app sp with percent 50",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-sp-p50-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(50)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-sp-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-sp-p100-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-sp-p100-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-sp-p100-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app sp with percent 100",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app sp with percent 100",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-sp-p100-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(100)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-sp-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-core-p50-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-core-p50-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-core-p50-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app core with percent 50",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app core with percent 50",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-core-p50-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(50)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-core-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-ecs-taskstop-core-p100-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-ecs-taskstop-core-p100-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-ecs-taskstop-core-p100-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "ECSTaskStopAction": {
+                    "actionId": "aws:ecs:stop-task",
+                    "description": "ECS Task Stop for service app core with percent 100",
+                    "parameters": {},
+                    "targets": {
+                      "Tasks": "ECSTaskStop"
+                    }
+                  }
+                },
+                "description": "Stop ECS Task for service app core with percent 100",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-ecs-taskstop-core-p100-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "ECSTaskStop": {
+                    "resourceType": "aws:ecs:task",
+                    "selectionMode": "PERCENT(100)",
+                    "parameters": {
+                      "cluster": "sw-dts-dev-ecs-cluster-infra-main-aws",
+                      "service": "sw-dts-dev-ecs-core-main-aws"
+                    }
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-rdsfailover-activationportal-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-rdsfailover-activationportal-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-activationportal-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "RDSFailoverAction": {
+                    "actionId": "aws:rds:failover-db-cluster",
+                    "description": "Aurora Serverless RDS Failover DB activationportal",
+                    "parameters": {},
+                    "targets": {
+                      "Clusters": "RDSFailover"
+                    }
+                  }
+                },
+                "description": "Aurora Serverless RDS Failover DB activationportal",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-rdsfailover-activationportal-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "RDSFailover": {
+                    "resourceType": "aws:rds:cluster",
+                    "selectionMode": "ALL",
+                    "resourceArns": [
+                      "arn:aws:rds:eu-central-1:767398091386:cluster:sw-dts-dev-rds-activationportal"
+                    ]
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-rdsfailover-splitkeycoreservice-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-rdsfailover-splitkeycoreservice-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-splitkeycoreservice-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "RDSFailoverAction": {
+                    "actionId": "aws:rds:failover-db-cluster",
+                    "description": "Aurora Serverless RDS Failover DB splitkeycoreservice",
+                    "parameters": {},
+                    "targets": {
+                      "Clusters": "RDSFailover"
+                    }
+                  }
+                },
+                "description": "Aurora Serverless RDS Failover DB splitkeycoreservice",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-rdsfailover-splitkeycoreservice-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "RDSFailover": {
+                    "resourceType": "aws:rds:cluster",
+                    "selectionMode": "ALL",
+                    "resourceArns": [
+                      "arn:aws:rds:eu-central-1:767398091386:cluster:sw-dts-dev-rds-splitkeycoreservice"
+                    ]
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-rdsfailover-splitkeysecurezone-experiment-main-aws": {
+            "id": "sw-dts-dev-fis-rdsfailover-splitkeysecurezone-experiment-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-rdsfailover-splitkeysecurezone-experiment-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::FIS::ExperimentTemplate",
+              "aws:cdk:cloudformation:props": {
+                "actions": {
+                  "RDSFailoverAction": {
+                    "actionId": "aws:rds:failover-db-cluster",
+                    "description": "Aurora Serverless RDS Failover DB splitkeysecurezone",
+                    "parameters": {},
+                    "targets": {
+                      "Clusters": "RDSFailover"
+                    }
+                  }
+                },
+                "description": "Aurora Serverless RDS Failover DB splitkeysecurezone",
+                "experimentOptions": {
+                  "accountTargeting": "single-account",
+                  "emptyTargetResolutionMode": "fail"
+                },
+                "logConfiguration": {
+                  "logSchemaVersion": 2,
+                  "cloudWatchLogsConfiguration": {
+                    "LogGroupArn": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfisfislogsmainawsDAB7E1DF",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "roleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfisexecrolemainaws533C719F",
+                    "Arn"
+                  ]
+                },
+                "stopConditions": [
+                  {
+                    "source": "none"
+                  }
+                ],
+                "tags": {
+                  "Environment": "dev",
+                  "Name": "sw-dts-dev-fis-rdsfailover-splitkeysecurezone-experiment-main-aws",
+                  "sw:application": "fis",
+                  "sw:cost_center": "C843",
+                  "sw:environment": "dev",
+                  "sw:product": "dts"
+                },
+                "targets": {
+                  "RDSFailover": {
+                    "resourceType": "aws:rds:cluster",
+                    "selectionMode": "ALL",
+                    "resourceArns": [
+                      "arn:aws:rds:eu-central-1:767398091386:cluster:sw-dts-dev-rds-splitkeysecurezone"
+                    ]
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_fis.CfnExperimentTemplate",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-role-main-aws": {
+            "id": "sw-dts-dev-fis-canary-role-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws",
+            "children": {
+              "Importsw-dts-dev-fis-canary-role-main-aws": {
+                "id": "Importsw-dts-dev-fis-canary-role-main-aws",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/Importsw-dts-dev-fis-canary-role-main-aws",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.131.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/CloudWatchSyntheticsFullAccess"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/AmazonEC2FullAccess"
+                          ]
+                        ]
+                      }
+                    ],
+                    "roleName": "sw-dts-dev-fis-canary-role-main-aws",
+                    "tags": [
+                      {
+                        "key": "sw:application",
+                        "value": "fis"
+                      },
+                      {
+                        "key": "sw:cost_center",
+                        "value": "C843"
+                      },
+                      {
+                        "key": "sw:environment",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "sw:product",
+                        "value": "dts"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.131.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-role-main-aws/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "s3:GetObject",
+                                "s3:PutObject"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:aws:s3:::",
+                                    {
+                                      "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              }
+                            },
+                            {
+                              "Action": "s3:GetBucketLocation",
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:aws:s3:::",
+                                    {
+                                      "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                                    }
+                                  ]
+                                ]
+                              }
+                            },
+                            {
+                              "Action": [
+                                "logs:CreateLogGroup",
+                                "logs:CreateLogStream",
+                                "logs:PutLogEvents"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "arn:aws:logs:*:767398091386:log-group:/aws/lambda/*"
+                            },
+                            {
+                              "Action": [
+                                "cloudwatch:PutMetricData",
+                                "ec2:CreateNetworkInterface",
+                                "ec2:DeleteNetworkInterface",
+                                "ec2:DescribeNetworkInterfaces",
+                                "s3:ListAllMyBuckets",
+                                "xray:PutTraceSegments"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": "*"
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "swdtsdevfiscanaryrolemainawsDefaultPolicyD51DBB3E",
+                        "roles": [
+                          {
+                            "Ref": "swdtsdevfiscanaryrolemainaws84504C58"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.131.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-sg-main-aws": {
+            "id": "sw-dts-dev-fis-canary-sg-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sg-main-aws",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sg-main-aws/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Allow the communication from Canary",
+                    "groupName": "sw-dts-dev-fis-canary-sg-main-aws",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "1.2.3.4/5",
+                        "ipProtocol": "tcp",
+                        "fromPort": 443,
+                        "toPort": 443,
+                        "description": "from 1.2.3.4/5:443"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sw:application",
+                        "value": "fis"
+                      },
+                      {
+                        "key": "sw:cost_center",
+                        "value": "C843"
+                      },
+                      {
+                        "key": "sw:environment",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "sw:product",
+                        "value": "dts"
+                      }
+                    ],
+                    "vpcId": "vpc-12345"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.131.0"
+                }
+              },
+              "to pl-6ea54007:443": {
+                "id": "to pl-6ea54007:443",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sg-main-aws/to pl-6ea54007:443",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "to pl-6ea54007:443",
+                    "destinationPrefixListId": "pl-6ea54007",
+                    "fromPort": 443,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "tcp",
+                    "toPort": 443
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.131.0"
+            }
+          },
+          "S3PrefixList": {
+            "id": "S3PrefixList",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/S3PrefixList",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-acp-appaz1a-main-aws": {
+            "id": "sw-dts-dev-fis-canary-acp-appaz1a-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-acp-appaz1a-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-acp-appaz1a-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-acp-appaz1a-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://activate.dts.dev.cloud01.swift.com/activate/status"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-0cfebf92b0918a0f3"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-sp-appaz1a-main-aws": {
+            "id": "sw-dts-dev-fis-canary-sp-appaz1a-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sp-appaz1a-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-sp-appaz1a-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-sp-appaz1a-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://signing-proxy.dts.dev.cloud01.swift.com/status"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-0cfebf92b0918a0f3"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-core-appaz1a-main-aws": {
+            "id": "sw-dts-dev-fis-canary-core-appaz1a-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-core-appaz1a-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-core-appaz1a-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-core-appaz1a-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://digital-token.dts.dev.cloud01.swift.com/info"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-0cfebf92b0918a0f3"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-acp-appaz1b-main-aws": {
+            "id": "sw-dts-dev-fis-canary-acp-appaz1b-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-acp-appaz1b-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-acp-appaz1b-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-acp-appaz1b-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://activate.dts.dev.cloud01.swift.com/activate/status"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-00151cadadb58dee0"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-sp-appaz1b-main-aws": {
+            "id": "sw-dts-dev-fis-canary-sp-appaz1b-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-sp-appaz1b-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-sp-appaz1b-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-sp-appaz1b-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://signing-proxy.dts.dev.cloud01.swift.com/status"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-00151cadadb58dee0"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "sw-dts-dev-fis-canary-core-appaz1b-main-aws": {
+            "id": "sw-dts-dev-fis-canary-core-appaz1b-main-aws",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/sw-dts-dev-fis-canary-core-appaz1b-main-aws",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::Synthetics::Canary",
+              "aws:cdk:cloudformation:props": {
+                "artifactS3Location": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "s3://",
+                      {
+                        "Ref": "swdtsdevfiscanarys3mainaws5F85F196"
+                      },
+                      "/canary/eu-central-1/sw-dts-dev-fis-canary-core-appaz1b-main-aws"
+                    ]
+                  ]
+                },
+                "code": {
+                  "handler": "index.handler",
+                  "script": "import json\nimport os\nimport http.client\nfrom selenium.webdriver.common.by import By\nimport urllib.parse\nfrom aws_synthetics.selenium import synthetics_webdriver as syn_webdriver\nfrom aws_synthetics.common import synthetics_logger as logger\n\ndef verify_request(method, url, post_data=None, headers={}):\n    parsed_url = urllib.parse.urlparse(url)\n    user_agent = str(syn_webdriver.get_canary_user_agent_string())\n    if \"User-Agent\" in headers:\n        headers[\"User-Agent\"] = f\"{user_agent} {headers['User-Agent']}\"\n    else:\n        headers[\"User-Agent\"] = user_agent\n\n    logger.info(f\"Making request with Method: '{method}' URL: {url}: Data: {json.dumps(post_data)} Headers: {json.dumps(headers)}\")\n\n    if parsed_url.scheme == \"https\":\n        conn = http.client.HTTPSConnection(parsed_url.hostname, parsed_url.port)\n    else:\n        conn = http.client.HTTPConnection(parsed_url.hostname, parsed_url.port)\n\n    conn.request(method, url, post_data, headers)\n    response = conn.getresponse()\n    logger.info(f\"Status Code: {response.status}\")\n    logger.info(f\"Response Headers: {json.dumps(response.headers.as_string())}\")\n\n    if not response.status or response.status < 200 or response.status > 299:\n        try:\n            logger.error(f\"Response: {response.read().decode()}\")\n        finally:\n            if response.reason:\n                conn.close()\n                raise Exception(f\"Failed: {response.reason}\")\n            else:\n                conn.close()\n                raise Exception(f\"Failed with status code: {response.status}\")\n\n    logger.info(f\"Response: {response.read().decode()}\")\n    logger.info(\"HTTP request successfully executed.\")\n    conn.close()\n\t\ndef handler(event, context):\n    \n    url = os.environ['TARGET_URL']  # Read the environment variable for the URL\n    method = 'GET'\n    postData = \"\"\n    headers1 = {}\n    \n    verify_request(method, url, None, headers1)\n    logger.info(\"Canary successfully executed.\")\n"
+                },
+                "executionRoleArn": {
+                  "Fn::GetAtt": [
+                    "swdtsdevfiscanaryrolemainaws84504C58",
+                    "Arn"
+                  ]
+                },
+                "failureRetentionPeriod": 30,
+                "name": "sw-dts-dev-fis-canary-core-appaz1b-main-aws",
+                "runConfig": {
+                  "activeTracing": false,
+                  "environmentVariables": {
+                    "TARGET_URL": "https://digital-token.dts.dev.cloud01.swift.com/info"
+                  }
+                },
+                "runtimeVersion": "syn-python-selenium-5.0",
+                "schedule": {
+                  "expression": "rate(1 minute)"
+                },
+                "startCanaryAfterCreation": true,
+                "successRetentionPeriod": 30,
+                "tags": [
+                  {
+                    "key": "sw:application",
+                    "value": "fis"
+                  },
+                  {
+                    "key": "sw:cost_center",
+                    "value": "C843"
+                  },
+                  {
+                    "key": "sw:environment",
+                    "value": "dev"
+                  },
+                  {
+                    "key": "sw:product",
+                    "value": "dts"
+                  }
+                ],
+                "vpcConfig": {
+                  "securityGroupIds": [
+                    {
+                      "Fn::GetAtt": [
+                        "swdtsdevfiscanarysgmainaws1ECB8316",
+                        "GroupId"
+                      ]
+                    }
+                  ],
+                  "subnetIds": [
+                    "subnet-00151cadadb58dee0"
+                  ],
+                  "vpcId": "vpc-12345"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_synthetics.CfnCanary",
+              "version": "2.131.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "sw-dts-dev-fis-infra-stack-main-aws/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.131.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.131.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "sw-dts-dev-fis-infra-stack-main-aws/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.131.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.131.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.2"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.131.0"
+    }
+  }
+}

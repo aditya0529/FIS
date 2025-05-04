@@ -1,0 +1,28 @@
+[
+  {
+    "app_info": {
+      "app_name": [
+        "mra"
+      ],
+      "app_url": [
+        "https://service1.mra.refapp.dev.cloud01.swift.com/mra/api/container/health"
+      ]
+    },
+    "subnet_id": "subnet-054e8b194d8eaee0b",
+    "canary_name": "appaz1a",
+    "az_name": "eu-central-1a"
+  },
+  {
+    "app_info": {
+      "app_name": [
+        "mra"
+      ],
+      "app_url": [
+        "https://service1.mra.refapp.dev.cloud01.swift.com/mra/api/container/health"
+      ]
+    },
+    "subnet_id": "subnet-077f4ee048dc9bb07",
+    "canary_name": "appaz1b",
+    "az_name": "eu-central-1b"
+  }
+]

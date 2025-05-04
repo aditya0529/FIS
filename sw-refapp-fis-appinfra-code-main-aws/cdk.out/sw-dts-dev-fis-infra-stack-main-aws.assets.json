@@ -1,0 +1,20 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "f7167a2cfc07f1fe28dd237fef2387022b3bb717634780ebe36c924c70185a02": {
+      "source": {
+        "path": "sw-dts-dev-fis-infra-stack-main-aws.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "767398091386-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-767398091386-eu-central-1",
+          "objectKey": "f7167a2cfc07f1fe28dd237fef2387022b3bb717634780ebe36c924c70185a02.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::767398091386:role/cdk-hnb659fds-file-publishing-role-767398091386-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
