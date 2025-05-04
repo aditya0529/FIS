@@ -24,7 +24,7 @@ def create_fis_ecs_task_kill_process_experiment_body(self, config, role, log_gro
         },
         actions={
             "ECSTaskKillProcessAction": fis.CfnExperimentTemplate.ExperimentTemplateActionProperty(
-                action_id="aws:ecs:task:kill-process",
+                action_id="aws:ecs:task-kill-process",
                 description=f"Kill process '{process_name}' in ECS tasks for {ecs_app_name}",
                 parameters={
                     "process": process_name,

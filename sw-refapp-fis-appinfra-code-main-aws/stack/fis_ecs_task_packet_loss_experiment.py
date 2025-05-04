@@ -24,7 +24,7 @@ def create_fis_ecs_task_packet_loss_experiment_body(self, config, role, log_grou
         },
         actions={
             "ECSTaskPacketLossAction": fis.CfnExperimentTemplate.ExperimentTemplateActionProperty(
-                action_id="aws:ecs:inject-network-packet-loss",
+                action_id="aws:ecs:task-network-packet-loss",
                 description=f"Inject {loss_percent}% packet loss in ECS tasks for {ecs_app_name}",
                 parameters={
                     "lossPercent": str(loss_percent),
