@@ -9,16 +9,23 @@ def create_fis_ecs_task_cpustress_experiment_body(self, config, role, log_group,
         targets={
             "ECSTaskCPUStress": fis.CfnExperimentTemplate.ExperimentTemplateTargetProperty(
                 resource_type="aws:ecs:task",
-                resource_tags={"sw:product": "mra", "sw:app": ecs_app_name},
-                selection_mode="PERCENTAGE",
-                parameters={"percentage": percent}
+                parameters={
+                    "cluster": f"{config['resource_prefix']}-mra-{config['app_env']}-ecs-cluster-fra-{config['resource_suffix']}",
+                    "service": f"{config['resource_prefix']}-mra-{config['app_env']}-ecs-service-fra-{config['resource_suffix']}"
+                },
+                selection_mode=f"PERCENT({percent})"
             )
         },
         actions={
             "ECSTaskCPUStressAction": fis.CfnExperimentTemplate.ExperimentTemplateActionProperty(
-                action_id="aws:ecs:run-cpu-stress",
-                description=f"CPU Stress ECS Task for service app {ecs_app_name} with percent {percent}",
-                parameters={"duration": "PT15M"},
+                action_id="aws:ecs:task-cpu-stress",
+                description=f"ECS Task CPU Stress for service app {ecs_app_name} with percent {percent}",
+                parameters={
+                    "duration": "PT15M",
+                    "installDependencies": "true",
+                    "percent": "100",
+                    "workers": "0"
+                },
                 targets={
                     "Tasks": "ECSTaskCPUStress"
                 }

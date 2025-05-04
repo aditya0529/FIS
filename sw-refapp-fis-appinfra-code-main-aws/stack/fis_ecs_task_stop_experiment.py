@@ -9,9 +9,12 @@ def create_fis_ecs_task_stop_experiment_body(self, config, role, log_group, ecs_
         targets={
             "ECSTaskStop": fis.CfnExperimentTemplate.ExperimentTemplateTargetProperty(
                 resource_type="aws:ecs:task",
-                resource_tags={"sw:product": "mra", "sw:app": ecs_app_name},
-                selection_mode="PERCENTAGE",
-                parameters={"percentage": percent}
+                parameters={
+                    "cluster": f"{config['resource_prefix']}-mra-{config['app_env']}-ecs-cluster-fra-{config['resource_suffix']}",
+                    "service": f"{config['resource_prefix']}-mra-{config['app_env']}-ecs-service-fra-{config['resource_suffix']}"
+                },
+                selection_mode=f"PERCENT({percent})",
+                resource_tags={"sw:product": "mra", "sw:app": ecs_app_name}
             )
         },
         actions={
