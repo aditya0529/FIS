@@ -60,5 +60,11 @@ def create_fis_role_body(self, config):
     exec_role.add_managed_policy(
         iam.ManagedPolicy.from_aws_managed_policy_name("AmazonSSMFullAccess")
     )
+    exec_role.add_managed_policy(
+        iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSFaultInjectionSimulatorRDSAccess")
+    )
+    exec_role.add_managed_policy(
+        iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSFaultInjectionSimulatorNetworkAccess")
+    )
 
     return exec_role

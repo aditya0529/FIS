@@ -12,10 +12,12 @@ from cdk_nag import AwsSolutionsChecks, NagSuppressions
 from stack.cloud_infra import cloud_infra
 from util.app_config import ApplicationConfig
 
-def load_applications_from_json(file_path):
+def load_applications_from_json(file_path, region):
     with open(file_path, 'r') as f:
         data = json.load(f)
-    return [ApplicationConfig(app) for app in data]
+    # Get the application list for the specified region, or an empty list if region not found
+    region_specific_apps = data.get(region, [])
+    return [ApplicationConfig(app) for app in region_specific_apps]
 
 def get_def_stack_synth(config):
     return cdk.DefaultStackSynthesizer(
@@ -40,9 +42,6 @@ if __name__ == "__main__":
     )
     region_config_files = [cfg.strip() for cfg in region_config_files_env.split(",")]
 
-    # Load the same application config JSON for both stacks
-    app_config = load_applications_from_json(f"config/canary_app_list_{branch_name}.json")
-
     # Initializing CDK app
     app = cdk.App()
 
@@ -54,13 +53,19 @@ if __name__ == "__main__":
         config_parser.read(filenames=config_file)
         config = config_parser[branch_name]
 
+        # Load application config for the current region
+        app_config_for_region = load_applications_from_json(
+            f"config/canary_app_list_{branch_name}.json",
+            config['deployment_region']
+        )
+
         cdk_stack = cloud_infra(
             app,
             f"{config['resource_prefix']}-{config['service_name']}-"
             f"{config['app_env']}-{config['app_name']}-infra-stack-"
             f"{config['deployment_region']}-{config['resource_suffix']}",
             resource_config=config,
-            app_config=app_config,
+            app_config=app_config_for_region, # Pass region-specific app_config
             env=cdk.Environment(
                 account=f"{config['workload_account']}",
                 region=f"{config['deployment_region']}"

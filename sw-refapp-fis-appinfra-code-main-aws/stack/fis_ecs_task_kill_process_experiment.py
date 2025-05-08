@@ -19,7 +19,7 @@ def create_fis_ecs_task_kill_process_experiment_body(self, config, role, log_gro
                     "service": f"{config['resource_prefix']}-mra-{config['app_env']}-ecs-service-fra-{config['resource_suffix']}"
                 },
                 selection_mode=f"PERCENT({percent})",
-                resource_tags={"sw:product": "mra", "sw:app": ecs_app_name}
+                resource_tags={"sw:product": "mra", "sw:application": ecs_app_name}
             )
         },
         actions={
